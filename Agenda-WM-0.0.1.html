@@ -1,0 +1,60 @@
+<html>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.1/themes/base/jquery-ui.css"/>
+    <title>Agenda WM</title>
+    <style>
+	.framewrap {
+	    width:500px;
+	    height:300px;
+    	padding:10px;
+	    position: fixed;
+	    top: 10px;
+	    left: 10px;
+    	background-color:#87CEEB;
+	}
+	.appFrame {
+    	    width:99%;
+    	    height:93%;
+    	    background-color:#FFFFFF;
+	}
+    </style>
+</head>
+<body onLoad="makeDraggable()">
+    <a onclick="openApplication(1)">Open App 1</a><br />
+    <a onclick="openApplication(2)">Open App 2</a>
+    <div id="appContainer">
+        <!--<div onclick="moveToFront(1)" id="1" class="framewrap">
+	    <input type="button" onclick="closeApplication(1)" value="X" />
+            <iframe class="appFrame" src="about:blank"></iframe>
+        </div>
+        <div onclick="moveToFront(2)" id="2" class="framewrap">
+	    <input type="button" onclick="closeApplication(2)" value="X" />
+            <iframe class="appFrame" src="about:blank"></iframe>
+        </div>-->
+    </div>
+
+    <script>
+        function makeDraggable() {
+            $(".framewrap")
+                .draggable()
+                .resizable();
+        }
+        function moveToFront(app) {
+            $('.framewrap').css('z-index', 1);
+	        $('#' + app).css('z-index', 9999);
+        }
+	    function openApplication(app) {
+	       var newElement="<div onclick=\"moveToFront(" + app + ")\" id=\"" + app + "\" class=\"framewrap\"><input type=\"button\" onclick=\"closeApplication(" + app + ")\" value=\"X\" /><iframe class=\"appFrame\" src=\"about:blank\"></iframe></div>";
+	       var parent=document.getElementById('appContainer');
+	       parent.innerHTML+=newElement;
+	       makeDraggable();
+	   }
+	   function closeApplication(app) {
+	       var element = document.getElementById(app);
+           element.parentNode.removeChild(element);
+	   }
+    </script>
+</body>
+</html>
