@@ -1,3 +1,16 @@
+<!--
+_____/\\\\\\\\\______________________________________________________/\\\_________________        
+ ___/\\\\\\\\\\\\\___________________________________________________\/\\\_________________       
+  __/\\\/////////\\\___/\\\\\\\\______________________________________\/\\\_________________      
+   _\/\\\_______\/\\\__/\\\////\\\_____/\\\\\\\\___/\\/\\\\\\__________\/\\\___/\\\\\\\\\____     
+    _\/\\\\\\\\\\\\\\\_\//\\\\\\\\\___/\\\/////\\\_\/\\\////\\\____/\\\\\\\\\__\////////\\\___    
+     _\/\\\/////////\\\__\///////\\\__/\\\\\\\\\\\__\/\\\__\//\\\__/\\\////\\\____/\\\\\\\\\\__   
+      _\/\\\_______\/\\\__/\\_____\\\_\//\\///////___\/\\\___\/\\\_\/\\\__\/\\\___/\\\/////\\\__  
+       _\/\\\_______\/\\\_\//\\\\\\\\___\//\\\\\\\\\\_\/\\\___\/\\\_\//\\\\\\\/\\_\//\\\\\\\\/\\_ 
+        _\///________\///___\////////_____\//////////__\///____\///___\///////\//___\////////\//__
+					"So, what's on the agenda?"
+					(C) Innovation Inc. 2019
+-->
 <html>
 <head>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
@@ -46,7 +59,9 @@
 	        $('#' + app).css('z-index', 9999);
         }
 	    function openApplication(app) {
-	       var newElement="<div onclick=\"moveToFront('" + app + "')\" id='" + app + "' class='framewrap'><input type='button' onclick=\"closeApplication('" + app + "')\" value='X' /><iframe class='appFrame' src='apps/" + app + "/'></iframe></div>";
+	       int i = 0;
+	       for (i = 0; typeof (app + i) !== 'undefined'; i++);
+	       var newElement="<div onclick=\"moveToFront('" + app + i + "')\" id='" + app + i + "' class='framewrap'><input type='button' onclick=\"closeApplication('" + app + i + "')\" value='X' /><iframe class='appFrame' src='apps/" + app + "/'></iframe></div>";
 	       var parent=document.getElementById('appContainer');
 	       parent.innerHTML+=newElement;
 	       makeDraggable();
