@@ -60,7 +60,8 @@ _____/\\\\\\\\\______________________________________________________/\\\_______
         }
 	    function openApplication(app) {
 	       var i = 0;
-	       for (i = 0; typeof (app + i) !== 'undefined'; i++);
+	       for (i = 0; typeof (app + i) !== 'undefined'; i++)
+		       system.log(app+i);
 	       var newElement="<div onclick=\"moveToFront('" + app + i + "')\" id='" + app + i + "' class='framewrap'><input type='button' onclick=\"closeApplication('" + app + i + "')\" value='X' /><iframe class='appFrame' src='apps/" + app + "/'></iframe></div>";
 	       var parent=document.getElementById('appContainer');
 	       parent.innerHTML+=newElement;
