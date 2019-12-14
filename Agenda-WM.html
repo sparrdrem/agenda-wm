@@ -58,6 +58,7 @@ _____/\\\\\\\\\______________________________________________________/\\\_______
 	       var newElement="<div onclick=\"moveToFront('" + i + "')\" id='" + i + "' class='framewrap'><input type='button' onclick=\"closeApplication('" + i + "')\" value='X' /><iframe class='appFrame' src='apps/" + app + "/'></iframe></div>";
 	       var parent=document.getElementById('appContainer');
 	       parent.innerHTML+=newElement;
+	       moveToFront(i);
 	       makeDraggable();
 	   }
 	   function closeApplication(app) {
