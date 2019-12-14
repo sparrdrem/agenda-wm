@@ -52,17 +52,17 @@ _____/\\\\\\\\\______________________________________________________/\\\_______
 	        $('#' + app).css('z-index', 9999);
         }
 	    function openApplication(app) {
-	       /*var i = 0;
-	       for (i = 0; (app + i).equals(); i++)
-		       system.log(app+i);*/
-	       var newElement="<div onclick=\"moveToFront('" + app + "')\" id='" + app + "' class='framewrap'><input type='button' onclick=\"closeApplication('" + app + "')\" value='X' /><iframe class='appFrame' src='apps/" + app + "/'></iframe></div>";
+	       var i = 0;
+	       while ($('#' + i).length)
+	           i++;
+	       var newElement="<div onclick=\"moveToFront('" + i + "')\" id='" + i + "' class='framewrap'><input type='button' onclick=\"closeApplication('" + i + "')\" value='X' /><iframe class='appFrame' src='apps/" + app + "/'></iframe></div>";
 	       var parent=document.getElementById('appContainer');
 	       parent.innerHTML+=newElement;
 	       makeDraggable();
 	   }
 	   function closeApplication(app) {
 	       var element = document.getElementById(app);
-           element.parentNode.removeChild(element);
+               element.parentNode.removeChild(element);
 	   }
     </script>
 </body>
