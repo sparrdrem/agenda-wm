@@ -36,16 +36,9 @@ _____/\\\\\\\\\______________________________________________________/\\\_______
 </head>
 <body onLoad="makeDraggable()">
     <a onclick="openApplication(1)">Open App 1</a><br />
-    <a onclick="openApplication(2)">Open App 2</a>
+    <a onclick="openApplication('helloWorld')">Open App 2</a>
     <div id="appContainer">
-        <!--<div onclick="moveToFront(1)" id="1" class="framewrap">
-	    <input type="button" onclick="closeApplication(1)" value="X" />
-            <iframe class="appFrame" src="about:blank"></iframe>
-        </div>
-        <div onclick="moveToFront(2)" id="2" class="framewrap">
-	    <input type="button" onclick="closeApplication(2)" value="X" />
-            <iframe class="appFrame" src="about:blank"></iframe>
-        </div>-->
+        
     </div>
 
     <script>
@@ -59,10 +52,10 @@ _____/\\\\\\\\\______________________________________________________/\\\_______
 	        $('#' + app).css('z-index', 9999);
         }
 	    function openApplication(app) {
-	       var i = 0;
-	       for (i = 0; typeof (app + i) !== 'undefined'; i++)
-		       system.log(app+i);
-	       var newElement="<div onclick=\"moveToFront('" + app + i + "')\" id='" + app + i + "' class='framewrap'><input type='button' onclick=\"closeApplication('" + app + i + "')\" value='X' /><iframe class='appFrame' src='apps/" + app + "/'></iframe></div>";
+	       /*var i = 0;
+	       for (i = 0; (app + i).equals(); i++)
+		       system.log(app+i);*/
+	       var newElement="<div onclick=\"moveToFront('" + app + "')\" id='" + app + "' class='framewrap'><input type='button' onclick=\"closeApplication('" + app + "')\" value='X' /><iframe class='appFrame' src='apps/" + app + "/'></iframe></div>";
 	       var parent=document.getElementById('appContainer');
 	       parent.innerHTML+=newElement;
 	       makeDraggable();
