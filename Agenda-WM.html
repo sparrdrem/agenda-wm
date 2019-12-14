@@ -59,7 +59,7 @@ _____/\\\\\\\\\______________________________________________________/\\\_______
 	        $('#' + app).css('z-index', 9999);
         }
 	    function openApplication(app) {
-	       int i = 0;
+	       var i = 0;
 	       for (i = 0; typeof (app + i) !== 'undefined'; i++);
 	       var newElement="<div onclick=\"moveToFront('" + app + i + "')\" id='" + app + i + "' class='framewrap'><input type='button' onclick=\"closeApplication('" + app + i + "')\" value='X' /><iframe class='appFrame' src='apps/" + app + "/'></iframe></div>";
 	       var parent=document.getElementById('appContainer');
