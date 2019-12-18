@@ -46,7 +46,7 @@ _____/\\\\\\\\\______________________________________________________/\\\_______
     <h1>Agenda Demo</h1>
     <p>The below apps don't really exist, so you will get a "it may have been moved or deleted" error. This is normal.</p>
     <a onclick="openApplication(1, 750, 500)">Open App 1 (Custom size: 750x500)</a><br />
-    <a onclick="openApplication('helloWorld')">Open App 2 (Default Size: 500x300)</a>
+    <a onclick="openApplication('helloWorld')">Open App 2 (Default Size: </a>
     <!-- This container holds all the applications when open. Applications get removed from it when closed. -->
     <div id="appContainer">
         
@@ -92,6 +92,8 @@ _____/\\\\\\\\\______________________________________________________/\\\_______
             var newElement="<div onclick=\"moveToFront('" + i + "')\" id='" + i + "' class='framewrap' style='width:" + width + "px; height:" + height + "px'><input type='button' onclick=\"closeApplication('" + i + "')\" value='X' /><input type='button' onclick=\"maximizeApplication('" + i + "')\" value='\u25A1' /><iframe class='appFrame' src='apps/" + app + "/'></iframe></div>";
             var parent=document.getElementById('appContainer');
             parent.innerHTML+=newElement;
+	    if (width == "max" || height == "max")
+       	    	maximizeApplication(i);
             moveToFront(i);
             makeDraggable();
         } // Opens an application.
