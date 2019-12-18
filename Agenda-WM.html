@@ -13,19 +13,24 @@ _____/\\\\\\\\\______________________________________________________/\\\_______
 -->
 <html>
 <head>
+    <!-- Grab jQuery 1.9.1, jQuery UI 1.10.3, and the jQuery UI stylesheet -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
     <link rel="stylesheet" type="text/css" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.7.1/themes/base/jquery-ui.css"/>
     <title>Agenda WM</title>
+    <!--
+        framewrap class: the outer div that wraps appFrame
+        appFrame class: the styling for the application iframe
+        
+        Application sizing is now handled by JavaScript.
+    -->
     <style>
 	.framewrap {
-	    width:500px;
-	    height:300px;
-    	padding:10px;
-	    position: fixed;
+	    padding:10px;
+    	    position: fixed;
 	    top: 10px;
 	    left: 10px;
-    	background-color:#87CEEB;
+    	    background-color:#87CEEB;
 	}
 	.appFrame {
     	    width:99%;
@@ -34,37 +39,73 @@ _____/\\\\\\\\\______________________________________________________/\\\_______
 	}
     </style>
 </head>
+<!-- It's good practice to make everything draggable once the page loads, that way if some EXTREMELY unpatient person launches an application
+     before the page is fully loaded or something, it doesn't make the iframe immovable until another application is open. -->
 <body onLoad="makeDraggable()">
-    <a onclick="openApplication(1)">Open App 1</a><br />
-    <a onclick="openApplication('helloWorld')">Open App 2</a>
+    <!-- These buttons are for the demo and aren't required for the window manager itself. -->
+    <h1>Agenda Demo</h1>
+    <p>The below apps don't really exist, so you will get a "it may have been moved or deleted" error. This is normal.</p>
+    <a onclick="openApplication(1, 750, 500)">Open App 1 (Custom size: 750x500)</a><br />
+    <a onclick="openApplication('helloWorld')">Open App 2 (Default Size: </a>
+    <!-- This container holds all the applications when open. Applications get removed from it when closed. -->
     <div id="appContainer">
         
     </div>
 
+    <!-- The script that drives the whole thing -->
     <script>
         function makeDraggable() {
             $(".framewrap")
                 .draggable()
                 .resizable();
-        }
+        } // Makes all applications with the framewrap class draggable. Has to be ran every time applications are launched or things get sticky.
+
         function moveToFront(app) {
             $('.framewrap').css('z-index', 1);
-	        $('#' + app).css('z-index', 9999);
+	    $('#' + app).css('z-index', 9999);
+        } // Move a clicked application to the front
+
+	function openApplication(app, width, height) {
+            // Set width and height as default if one is <=-1
+            if (width <= -1 || height <= -1 || width == undefined || height == undefined) {
+                width="500";
+                height="300";
+            }
+            var i = 0;
+            // Get the first available application ID.
+            while ($('#' + i).length)
+                i++;
+            /*
+            This is just the following as a string:
+            <div onclick=moveToFront('[windowID]') id='[windowID]' class='framewrap' style='width:[width]px; height=[height]px'>
+                <input type='button' onclick="closeApplication('[windowID]')" value='X" />
+                <iframe class='appFrame' src='apps/[application name]'></iframe>
+            </div>
+            [windowID] is replaced with i (defined above)
+            [application name] is replaced with parameter "app" (used to determine the application name to open).
+
+            The app parameter points to a subdirectory called apps. This means if you were to run openApplication(foo), it will attempt to open an
+            Application stored at apps/foo/
+
+            Quite frustrating to work with, but it works. I'll make it fancier later, but right now it is good enough.
+            */
+            var newElement="<div onclick=\"moveToFront('" + i + "')\" id='" + i + "' class='framewrap' style='width:" + width + "px; height:" + height + "px'><input type='button' onclick=\"closeApplication('" + i + "')\" value='X' /><input type='button' onclick=\"maximizeApplication('" + i + "')\" value='\u25A1' /><iframe class='appFrame' src='apps/" + app + "/'></iframe></div>";
+            var parent=document.getElementById('appContainer');
+            parent.innerHTML+=newElement;
+            moveToFront(i);
+            makeDraggable();
+        } // Opens an application.
+
+	function closeApplication(id) {
+           var application = document.getElementById(id);
+           application.parentNode.removeChild(application);
+        } // Closes an application.
+
+        function maximizeApplication(id) {
+            document.getElementById(id).setAttribute('style', "height: 93%; width: 99%; top: 50px; left: 0px");
+            //document.getElementById(id).setAttribute('style', "top: 50px");
+            //document.getElementById(id).setAttribute('style', "left: 0px");
         }
-	    function openApplication(app) {
-	       var i = 0;
-	       while ($('#' + i).length)
-	           i++;
-	       var newElement="<div onclick=\"moveToFront('" + i + "')\" id='" + i + "' class='framewrap'><input type='button' onclick=\"closeApplication('" + i + "')\" value='X' /><iframe class='appFrame' src='apps/" + app + "/'></iframe></div>";
-	       var parent=document.getElementById('appContainer');
-	       parent.innerHTML+=newElement;
-	       moveToFront(i);
-	       makeDraggable();
-	   }
-	   function closeApplication(app) {
-	       var element = document.getElementById(app);
-               element.parentNode.removeChild(element);
-	   }
     </script>
 </body>
 </html>
