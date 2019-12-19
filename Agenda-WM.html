@@ -63,8 +63,8 @@ _____/\\\\\\\\\______________________________________________________/\\\_______
     <br />
     <h1>Agenda Demo</h1>
     <p>The below apps don't really exist, so you will get a "it may have been moved or deleted" error. This is normal.</p>
-    <a onclick="openApplication(1, 750, 500)">Open App 1 (Custom size: 750x500)</a><br />
-    <a onclick="openApplication('helloWorld')">Open App 2 (Default Size: 500x300)</a>
+    <a onclick="openApplication(1, 750, 500, 'appIcon.png')">Open App 1 (Custom size: 750x500)</a><br />
+    <a onclick="openApplication('helloWorld', -1, -1, 'appIcon.png')">Open App 2 (Default Size: 500x300)</a>
     <!-- This container holds all the applications when open. Applications get removed from it when closed. -->
     <div id="appContainer">
         <!-- This is the taskbar -->
@@ -114,7 +114,7 @@ _____/\\\\\\\\\______________________________________________________/\\\_______
 	        $('#' + app).css('z-index', 9999);
         } // Move a clicked application to the front
 
-	   function openApplication(app, width, height) {
+	   function openApplication(app, width, height, appIcon) {
            // Set width and height as default if one is <=-1
            if (width <= -1 || height <= -1 || width == undefined || height == undefined) {
                width="500";
@@ -141,7 +141,7 @@ _____/\\\\\\\\\______________________________________________________/\\\_______
            Quite frustrating to work with, but it works. I'll make it fancier later, but right now it is good enough.
            */
             var application="<div onclick=\"moveToFront('" + i + "')\" id='" + i + "' class='framewrap' style='width:" + width + "px; height:" + height + "px'><input type='button' onclick=\"closeApplication('" + i + "')\" value='X' /><input type='button' onclick=\"maximizeApplication('" + i + "')\" value='\u25A1' /><input type='button' onclick=\"minimizeApplication('" + i + "')\" value='_' /><iframe class='appFrame' src='apps/" + app + "/'></iframe></div>";
-            var taskbarApp="<div id='task" + i + "' onclick=\"minimizeApplication('" + i + "')\" class='taskbarApps'><img src='apps/" + app + "/" + app + ".png' style='width:42px;height:42px' align='middle' /></div>";
+            var taskbarApp="<div id='task" + i + "' onclick=\"minimizeApplication('" + i + "')\" class='taskbarApps'><img src='apps/" + app + "/" + appIcon + "' style='width:42px;height:42px' align='middle' /></div>";
             var parent=document.getElementById('appContainer');
             parent.innerHTML+=application;
             var parent=document.getElementById('taskbarApps');
