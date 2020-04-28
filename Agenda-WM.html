@@ -16,7 +16,7 @@ _____/\\\\\\\\\______________________________________________________/\\\_______
     <!-- Grab jQuery 1.9.1, jQuery UI 1.10.3, and the jQuery UI stylesheet -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
-    <script src="agenda-wm.js"></script>
+    <script src="https://raw.githubusercontent.com/sparrdrem/DremJS/master/agenda-wm.js"></script>
     <link rel="stylesheet" type="text/css" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.7.1/themes/base/jquery-ui.css"/>
     <title>Agenda WM</title>
     <!--
@@ -66,8 +66,8 @@ _____/\\\\\\\\\______________________________________________________/\\\_______
     <br />
     <h1>Agenda Demo</h1>
     <p>The below apps don't really exist, so you will get a "it may have been moved or deleted" error. This is normal.</p>
-    <a onclick="openApplication(1, 750, 500, 'appIcon.png')">Open App 1 (Custom size: 750x500)</a><br />
-    <a onclick="openApplication('helloWorld', -1, -1, 'appIcon.png')">Open App 2 (Default Size: 500x300)</a>
+    <a onclick="openApplication('appA', 750, 500, 'appIcon.png')">Open App 1 (Custom size: 750x500)</a><br />
+    <a onclick="openApplication('appB', -1, -1, 'appIcon.png')">Open App 2 (Default Size: 500x300)</a>
     <!-- This container holds all the applications when open. Applications get removed from it when closed. -->
     <div id="appContainer">
         <!-- This is the taskbar -->
@@ -81,7 +81,5 @@ _____/\\\\\\\\\______________________________________________________/\\\_______
                 </div>
         </div>
     </div>
-
-    <!-- The script that drives the whole thing -->
 </body>
 </html>
